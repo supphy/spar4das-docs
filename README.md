@@ -42,7 +42,7 @@ Basin-hopping optimization locates a posterior maximum. Numerical evaluation and
 
 [![SPAR4DAS processing workflow](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_1_workflow.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_1_workflow.png)
 
-*Figure 1 — Processing workflow from D3.5, Fig. 3.2.4.1. The single-channel inversion block runs in a CPU worker pool; the coordinator performs event aggregation and final output. Click any figure to open its full-resolution image.*
+*Figure 1 — Processing workflow. The single-channel inversion block runs in a CPU worker pool; the coordinator performs event aggregation and final output. Click any figure to open its full-resolution image.*
 
 ## A standardized public DAS test case
 
@@ -52,17 +52,17 @@ The inspected first chunk is approximately **41 GB** and contains the Alaska cab
 
 [![Origin times and magnitudes of the 60 Alaska earthquakes](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_2_alaska_event_catalog.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_2_alaska_event_catalog.png)
 
-*Figure 2 — Origin times and catalog magnitudes of the 60 earthquakes in the inspected Alaska data chunk, reproduced from D3.5, Fig. 3.2.4.2.*
+*Figure 2 — Origin times and catalog magnitudes of the 60 earthquakes in the inspected Alaska data chunk.*
 
 [![Alaska earthquake epicentres and the KKFLS and TERRA cable routes](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_3_alaska_events_and_cables.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_3_alaska_events_and_cables.png)
 
-*Figure 3 — Earthquake epicentres colored by magnitude and DAS cable routes in red, from D3.5, Fig. 3.2.4.3. Cable routes come from [Ni et al. (2024)](https://github.com/niyiyu/DAS-reconstruction) and are not supplied with MLSubDAS.*
+*Figure 3 — Earthquake epicentres colored by magnitude and DAS cable routes in red. Cable routes come from [Ni et al. (2024)](https://github.com/niyiyu/DAS-reconstruction) and are not supplied with MLSubDAS.*
 
 The end-to-end example is the **10 June 2023 earthquake, EventID 11707158**, recorded by KKFLS. Its catalog origin is **04:43:30.92 UTC**, epicentre **59.724°N, 152.662°W**, and catalog magnitude **ML 2.4**. Of 8,531 original channels, 4,617 have a P pick and 3,742 have an S pick; 5,623 have at least one of these annotations.
 
 [![The full KKFLS DAS record and an individual channel with P and S picks](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_4_alaska_record_and_picks.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_4_alaska_record_and_picks.png)
 
-*Figure 4 — Event 11707158: full-cable waveform overview above and one channel below, with P/S picks, from D3.5, Fig. 3.2.4.4. Display filtering is 1–30 Hz; amplitudes are arbitrary units and the color scale is clipped at the 99th percentile of absolute amplitude. This display does not restore bandwidth already removed during dataset preparation. A and B mark the first and last sensed channels; time is relative to record start.*
+*Figure 4 — Event 11707158: full-cable waveform overview above and one channel below, with P/S picks. Display filtering is 1–30 Hz; amplitudes are arbitrary units and the color scale is clipped at the 99th percentile of absolute amplitude. This display does not restore bandwidth already removed during dataset preparation. A and B mark the first and last sensed channels; time is relative to record start.*
 
 ## Metadata findings and recommendations
 
@@ -70,7 +70,7 @@ The standardized interface enabled an end-to-end test, while exposing metadata g
 
 [![Comparison of metadata supported by SeisBench DAS and present in MLSubDAS](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_5_das_metadata_comparison.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_5_das_metadata_comparison.png)
 
-*Figure 5 — Metadata comparison from D3.5, Fig. 3.2.4.5. Green identifies present information and red identifies missing information. The lower boxes indicate where required timing, channel-position, and amplitude information could be represented.*
+*Figure 5 — Metadata comparison. Green identifies present information and red identifies missing information. The lower boxes indicate where required timing, channel-position, and amplitude information could be represented.*
 
 **Absolute timing.** The SeisBench DAS writer supports `record_start_time`, but this field is not populated in the inspected MLSubDAS files. Catalog origin time alone does not put picks and waveforms on a common absolute time axis. Comparing S–P times using Vp/Vs = 1.75 and AK135 P- and S-wave travel times places the origin **3.0–4.1 s before record start**, with a median of **3.6 s** and a spread of about **1 s** for this event. This estimated timing supports software testing; the true start time is still required for independent scientific use.
 
@@ -149,7 +149,7 @@ The measured machine had an **Intel Core i7-1260P**, **12 physical cores / 16 lo
 
 [![Assumed serial, measured laptop and simulated distributed processing times](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_6_processing_time_comparison.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_6_processing_time_comparison.png)
 
-*Figure 6 — Processing-time comparison from D3.5, Fig. 3.2.4.6. Gray is an assumed serial reference, blue is the measured laptop result, and orange is a simulation. The right panel expands the parallel-processing time scale.*
+*Figure 6 — Processing-time comparison. Gray is an assumed serial reference, blue is the measured laptop result, and orange is a simulation. The right panel expands the parallel-processing time scale.*
 
 The laptop elapsed time was **14,266.54 s**: **14,118.46 s** in channel dispatch and **148.08 s** in other phases. Across 2,919 fitted channels, mean channel wall time was **76.75 s**, including **76.02 s** in the fitter, while workers shared the machine. These are not isolated serial channel timings. The longest scheduled job took **384.89 s**.
 
@@ -165,7 +165,7 @@ The diagnostic example for **channel 03983** gives **Mw = 2.552 ± 0.067**, **fc
 
 [![Channel 03983 signal and noise windows, spectral fit and marginal posterior densities](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_7_channel_03983_diagnostic.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_7_channel_03983_diagnostic.png)
 
-*Figure 7 — Diagnostic example from D3.5, Fig. 3.2.4.7. Top: S-wave and pre-P noise windows. Middle: signal/noise spectra and fitted model, with an fc marker and posterior ±1σ band; the spectrum display ends at 20 Hz. Bottom: saved marginal PDFs for log₁₀M₀, fc and γ. Amplitudes share the common illustrative normalization described above.*
+*Figure 7 — Diagnostic example. Top: S-wave and pre-P noise windows. Middle: signal/noise spectra and fitted model, with an fc marker and posterior ±1σ band; the spectrum display ends at 20 Hz. Bottom: saved marginal PDFs for log₁₀M₀, fc and γ. Amplitudes share the common illustrative normalization described above.*
 
 This diagnostic uses the later single-channel rerun with refined posterior-grid settings. The bulk event estimates and timings remain those of the full-cable run. The figure is regenerated offline from saved NumPy objects, without repeating inversion during plotting.
 
@@ -173,7 +173,7 @@ This diagnostic uses the later single-channel rerun with refined posterior-grid 
 
 [![Spectra and fitted curves for all 2058 accepted channels with event parameter markers](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_8_accepted_channel_spectra.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_8_accepted_channel_spectra.png)
 
-*Figure 8 — All 2,058 accepted-channel spectra and individual fitted curves from D3.5, Fig. 3.2.4.8, without channel decimation or spectral averaging. Color identifies channel position along the cable. Filled/open points distinguish frequencies inside/outside each channel's inversion band. The display ends at 20 Hz, and curves remain restricted to their fitted bands. Red arrows mark event log₁₀M₀ and fc. Header errors are the 1σ sample spread across accepted channels; the catalog reference is ML 2.4.*
+*Figure 8 — All 2,058 accepted-channel spectra and individual fitted curves, without channel decimation or spectral averaging. Color identifies channel position along the cable. Filled/open points distinguish frequencies inside/outside each channel's inversion band. The display ends at 20 Hz, and curves remain restricted to their fitted bands. Red arrows mark event log₁₀M₀ and fc. Header errors are the 1σ sample spread across accepted channels; the catalog reference is ML 2.4.*
 
 The spectral cloud shows substantial channel-to-channel amplitude variation even for one earthquake. A consistent event estimate does not imply identical sensitivity at every fiber location. The pre-existing 1–20 Hz filtering and the adopted attenuation/site model also limit interpretation of fc and high-frequency-decay variations.
 
@@ -181,7 +181,7 @@ The spectral cloud shows substantial channel-to-channel amplitude variation even
 
 [![Maps of channel-wise moment magnitude and corner frequency along the Alaska cable](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_9_source_parameter_maps.png)](https://raw.githubusercontent.com/supphy/spar4das-docs/main/figures/figure_9_source_parameter_maps.png)
 
-*Figure 9 — Mw and fc maps from D3.5, Fig. 3.2.4.9. Circles are accepted fits, crosses are rejected fits, gray channels have no fitted estimate, and the star is the epicentre. All 2,919 fitted solutions are shown; only the 2,058 accepted solutions contribute to the event estimate. Channel coordinates are reconstructed estimates. Color-bar triangles indicate saturation; the basemap is Natural Earth.*
+*Figure 9 — Mw and fc maps. Circles are accepted fits, crosses are rejected fits, gray channels have no fitted estimate, and the star is the epicentre. All 2,919 fitted solutions are shown; only the 2,058 accepted solutions contribute to the event estimate. Channel coordinates are reconstructed estimates. Color-bar triangles indicate saturation; the basemap is Natural Earth.*
 
 The strongest Mw outliers occur toward both ends of the analyzed cable, especially the high-channel-number end. Of **135 fitted Mw estimates outside the displayed 2.0–3.2 color interval**, **90** occur within the first or last **10% of the input channel-ID range**. Those two end regions contain **371 of 2,919 fitted channels**. This describes a spatial pattern, not an additional quality-rejection rule.
 
